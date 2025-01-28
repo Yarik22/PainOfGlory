@@ -47,4 +47,11 @@ public class ButtonTextShake : MonoBehaviour, IPointerEnterHandler, IPointerExit
             textTransform.anchoredPosition = originalPosition + new Vector3(offsetX, offsetY, 0);
         }
     }
+
+    public void ResetShakeEffect()
+    {
+        isShaking = false;
+        textTransform.anchoredPosition = originalPosition;
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+    }
 }
