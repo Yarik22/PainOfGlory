@@ -3,21 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    [SerializeField] private string continueScene;
-    [SerializeField] private string menuScene;
     [SerializeField] private GameObject[] menuPanels;
     public void QuitGame()
     {
         Application.Quit();
     }
-
-    public void ContinueGame()
+    public void ChangeScene(string sceneName)
     {
-        SceneManager.LoadScene(continueScene);
-    }
-    public void StopGame()
-    {
-        SceneManager.LoadScene(menuScene);
+        SceneManager.LoadScene(sceneName);
     }
     public void OpenPanel(GameObject panelToOpen)
     {

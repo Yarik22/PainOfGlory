@@ -631,8 +631,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e89dceedd9fa8428e08146a8660e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  continueScene: Spawn
-  menuScene: MainMenu
   menuPanels:
   - {fileID: 453743114}
   - {fileID: 882002358}
@@ -2163,14 +2161,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 346116721}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: ContinueGame
-        m_Mode: 1
+        m_MethodName: ChangeScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Spawn
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1034802443
