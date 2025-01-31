@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Cainos.PixelArtTopDown_Basic
 {
     //animate the sprite color base on the gradient and time
-    public class SpriteColorAnimation : MonoBehaviour
+    public class RuneGlowController  : MonoBehaviour
     {
         public Gradient gradient;
         public float time;
