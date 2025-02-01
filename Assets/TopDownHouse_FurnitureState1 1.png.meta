@@ -984,7 +984,42 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      TopDownHouse_FurnitureState1 1_0: 3521635177042815284
+      TopDownHouse_FurnitureState1 1_1: 8105108450825186578
+      TopDownHouse_FurnitureState1 1_10: 7746852653217257960
+      TopDownHouse_FurnitureState1 1_11: -3516261583386058933
+      TopDownHouse_FurnitureState1 1_12: -4221112181186125247
+      TopDownHouse_FurnitureState1 1_13: 7135168825011908417
+      TopDownHouse_FurnitureState1 1_14: 4039264983073816164
+      TopDownHouse_FurnitureState1 1_15: 4331167446640038724
+      TopDownHouse_FurnitureState1 1_16: -690135565051158837
+      TopDownHouse_FurnitureState1 1_17: -3494960119033974812
+      TopDownHouse_FurnitureState1 1_18: -5512616593757347135
+      TopDownHouse_FurnitureState1 1_19: 6624321041335043752
+      TopDownHouse_FurnitureState1 1_2: -2733253410198543783
+      TopDownHouse_FurnitureState1 1_20: 3117064117697314386
+      TopDownHouse_FurnitureState1 1_21: 3695262458550963272
+      TopDownHouse_FurnitureState1 1_22: 5910866389776244511
+      TopDownHouse_FurnitureState1 1_23: -5765501357968748506
+      TopDownHouse_FurnitureState1 1_24: 3354864187871277382
+      TopDownHouse_FurnitureState1 1_25: -3091085556089457879
+      TopDownHouse_FurnitureState1 1_26: 5573587118527615163
+      TopDownHouse_FurnitureState1 1_27: -7719293018655332649
+      TopDownHouse_FurnitureState1 1_28: -3860639118642480674
+      TopDownHouse_FurnitureState1 1_29: 5737239731332502993
+      TopDownHouse_FurnitureState1 1_3: -4044420659355783469
+      TopDownHouse_FurnitureState1 1_30: 6179937359901540478
+      TopDownHouse_FurnitureState1 1_31: -1032094571227579175
+      TopDownHouse_FurnitureState1 1_32: -8986205612329669955
+      TopDownHouse_FurnitureState1 1_33: -8661887996853147713
+      TopDownHouse_FurnitureState1 1_34: -4440539795195015652
+      TopDownHouse_FurnitureState1 1_4: 6177435053416646149
+      TopDownHouse_FurnitureState1 1_5: -5146925878120497704
+      TopDownHouse_FurnitureState1 1_6: 8997391006312532333
+      TopDownHouse_FurnitureState1 1_7: -2725896129556863903
+      TopDownHouse_FurnitureState1 1_8: -202868705155953274
+      TopDownHouse_FurnitureState1 1_9: -370294059835864002
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

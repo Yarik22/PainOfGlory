@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CATSPRITESHEET_Orange_0: 1149386278463536509
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
