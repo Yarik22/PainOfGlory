@@ -4,7 +4,7 @@ public class SFXManager : MonoBehaviour
 {
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip[] sfxArray;
-
+  
     public void PlayRandomSFX()
     {
         if (sfxArray.Length == 0)

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class TeleportationToTotem : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class TeleportationToTotem : MonoBehaviour
     [SerializeField] private float detectionRadius = 5f;
     [SerializeField] private float teleportCooldown = 3f;
     [SerializeField] private AudioClip teleportSound;
+    [SerializeField] private AudioSource audioSource;
 
     private Transform playerTransform;
     private float lastTeleportTime = -Mathf.Infinity;
@@ -41,9 +43,10 @@ public class TeleportationToTotem : MonoBehaviour
 
     void TeleportPlayerToTotem(Transform totemTransform)
     {
-        if (teleportSound)
+        if (teleportSound && audioSource != null)
         {
-            AudioSource.PlayClipAtPoint(teleportSound, playerTransform.position);
+            audioSource.clip = teleportSound;
+            audioSource.Play();
         }
 
         playerTransform.position = totemTransform.position;

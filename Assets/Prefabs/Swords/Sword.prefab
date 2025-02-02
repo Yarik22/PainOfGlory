@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5542646301542103939}
   - component: {fileID: 6833175140724625161}
   - component: {fileID: 2444537889165859167}
-  - component: {fileID: 6276448189191119410}
+  - component: {fileID: -8963774361128596682}
   m_Layer: 20
   m_Name: Sword
   m_TagString: Untagged
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1869315837
   m_SortingLayer: 1
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: cc2db763b1d4ca143bd3106a09314150, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -102,13 +102,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: -480
+  externalAudioSource: {fileID: -8963774361128596682}
   swingSound: {fileID: 8300000, guid: 02ce8b4a9d3e8c14dbfae1b7f2e0e1ff, type: 3}
   trailTime: 0.5
   startWidth: 0.1
   endWidth: 0
   trailColor: {r: 1, g: 1, b: 1, a: 0.74509805}
   trailMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
---- !u!82 &6276448189191119410
+--- !u!82 &-8963774361128596682
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,9 +118,10 @@ AudioSource:
   m_GameObject: {fileID: 2833546378881004422}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8765517159721210125, guid: 6ae2fb051f7c18f4c9db396aaf8dac6a,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 02ce8b4a9d3e8c14dbfae1b7f2e0e1ff, type: 3}
+  m_Resource: {fileID: 8300000, guid: 02ce8b4a9d3e8c14dbfae1b7f2e0e1ff, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

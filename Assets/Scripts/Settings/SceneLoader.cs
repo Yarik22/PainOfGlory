@@ -21,7 +21,10 @@ public class SceneLoader : MonoBehaviour
         {
             shake.ResetShakeEffect();
         }
+
     }
+
+
     private void CloseAllPanels()
     {
         foreach (GameObject panel in menuPanels)

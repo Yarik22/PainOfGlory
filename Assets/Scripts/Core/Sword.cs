@@ -5,11 +5,12 @@ public class Sword : MonoBehaviour
     [SerializeField] private float rotationSpeed = -480f;
     private float targetRotation = -180f;
     private float timeToDestroy;
-    private AudioSource audioSource;
+
+    [Header("Audio Settings")]
+    [SerializeField] private AudioSource externalAudioSource;
     [SerializeField] private AudioClip swingSound;
 
     private TrailRenderer tipTrail;
-
     private Transform tipPosition;
     private SpriteRenderer swordRenderer;
 
@@ -25,12 +26,16 @@ public class Sword : MonoBehaviour
         float rotationTime = Mathf.Abs(targetRotation / rotationSpeed);
         timeToDestroy = rotationTime;
 
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource && swingSound)
+        if (externalAudioSource == null)
         {
-            audioSource.clip = swingSound;
-            audioSource.pitch = swingSound.length / timeToDestroy;
-            audioSource.Play();
+            externalAudioSource = GetComponent<AudioSource>();
+        }
+
+        if (externalAudioSource && swingSound)
+        {
+            externalAudioSource.clip = swingSound;
+            externalAudioSource.pitch = swingSound.length / timeToDestroy;
+            externalAudioSource.Play();
         }
 
         tipPosition = new GameObject("TipPosition").transform;
@@ -42,7 +47,6 @@ public class Sword : MonoBehaviour
         swordRenderer = GetComponent<SpriteRenderer>();
 
         ConfigureTrail(tipTrail);
-
         SetTrailSortingLayer(tipTrail);
 
         Destroy(gameObject, timeToDestroy);
