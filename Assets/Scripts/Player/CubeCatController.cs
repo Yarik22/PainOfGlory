@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Cainos.PixelArtTopDown_Basic
 {
-    public class CudeCatController : MonoBehaviour
+    public class CubeCatController : MonoBehaviour
     {
         public float speed;
 

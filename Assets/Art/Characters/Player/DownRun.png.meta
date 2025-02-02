@@ -63,7 +63,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -115,133 +115,133 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DownRun-5-imageonline.co-merged_0
+      name: DownRun_0
       rect:
         serializedVersion: 2
-        x: 39
+        x: 40
         y: 0
-        width: 170
-        height: 193
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 168
+        height: 192
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 77d1b464a240094c0800000000000000
-      internalID: -4282918666014876297
+      spriteID: b254dc6890e53c64098a0de435a15e54
+      internalID: 143501749
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DownRun-5-imageonline.co-merged_1
+      name: DownRun_1
       rect:
         serializedVersion: 2
-        x: 311
+        x: 312
         y: 0
-        width: 170
-        height: 193
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 168
+        height: 192
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 85e564a755bfc27a0800000000000000
-      internalID: -6400464625858093480
+      spriteID: 32558b7b998491546b8b29823cb3dfac
+      internalID: 533577971
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DownRun-5-imageonline.co-merged_2
+      name: DownRun_2
       rect:
         serializedVersion: 2
-        x: 567
+        x: 568
         y: 0
-        width: 170
-        height: 201
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 168
+        height: 200
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2876cef38b36d8b90800000000000000
-      internalID: -7238019383116929150
+      spriteID: 0d17df83a33cf194fa15de508a641a79
+      internalID: -248600447
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DownRun-5-imageonline.co-merged_3
+      name: DownRun_3
       rect:
         serializedVersion: 2
-        x: 807
+        x: 808
         y: 0
-        width: 170
-        height: 193
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 168
+        height: 192
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 201a788da252a3b90800000000000000
-      internalID: -7261450583229882110
+      spriteID: bf48e391b682b20459641690c19b29b7
+      internalID: -895995903
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DownRun-5-imageonline.co-merged_4
+      name: DownRun_4
       rect:
         serializedVersion: 2
-        x: 1047
+        x: 1048
         y: 0
-        width: 170
-        height: 193
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 168
+        height: 192
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 04233d0419ff59e30800000000000000
-      internalID: 4509791601204343360
+      spriteID: 99efe6c7e91454845880803ce46e56eb
+      internalID: 1850818332
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DownRun-5-imageonline.co-merged_5
+      name: DownRun_5
       rect:
         serializedVersion: 2
-        x: 1303
+        x: 1304
         y: 0
-        width: 170
-        height: 201
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 168
+        height: 200
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a7eb901f7cf86d9a0800000000000000
-      internalID: -6208616947378438534
+      spriteID: 6640168914ece3e4e983d2293e8e02bf
+      internalID: -978702854
       vertices: []
       indices: 
       edges: []
@@ -250,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: efe11dc3e482b2e43b007e2e09b5d5bf
     internalID: 0
     vertices: []
     indices: 
@@ -260,12 +260,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      DownRun-5-imageonline.co-merged_0: -4282918666014876297
-      DownRun-5-imageonline.co-merged_1: -6400464625858093480
-      DownRun-5-imageonline.co-merged_2: -7238019383116929150
-      DownRun-5-imageonline.co-merged_3: -7261450583229882110
-      DownRun-5-imageonline.co-merged_4: 4509791601204343360
-      DownRun-5-imageonline.co-merged_5: -6208616947378438534
+      DownRun_0: 143501749
+      DownRun_1: 533577971
+      DownRun_2: -248600447
+      DownRun_3: -895995903
+      DownRun_4: 1850818332
+      DownRun_5: -978702854
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
