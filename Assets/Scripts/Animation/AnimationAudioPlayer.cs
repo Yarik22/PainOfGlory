@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AudioPlayer : StateMachineBehaviour
+public class AnimationAudioPlayer : StateMachineBehaviour
 {
     [SerializeField] private AudioClip sound;
     private AudioSource audioSource;

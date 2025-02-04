@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RevealAnimationController : MonoBehaviour
+public class RevealDistanceAnimationController : MonoBehaviour
 {
     [SerializeField] private Transform player;
     private Animator animator;

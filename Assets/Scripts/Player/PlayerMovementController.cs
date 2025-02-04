@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerMovementController : MonoBehaviour
 {
     [SerializeField] private float forwardSpeed = 4f;
     [SerializeField] private float backwardSpeed = 2f;
@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private float speed;
     private float lastAttackTime;
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
@@ -28,11 +28,31 @@ public class PlayerController : MonoBehaviour
         lastAttackTime = -attackCooldown;
     }
 
-    void Update()
+    private void Update()
+    {
+        UpdateMovementInput();
+        UpdateAnimatorParameters();
+
+        if (isMouseButtonHeld && Time.time >= lastAttackTime + attackCooldown)
+        {
+            Attack();
+            lastAttackTime = Time.time;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        UpdateMovement();
+    }
+
+    private void UpdateMovementInput()
     {
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         isMouseButtonHeld = Input.GetMouseButton(0);
+    }
 
+    private void UpdateAnimatorParameters()
+    {
         Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 mouseDirection = (cursorPosition - (Vector2)playerCollider.bounds.center).normalized;
 
@@ -46,15 +66,9 @@ public class PlayerController : MonoBehaviour
         float dotProduct = Vector2.Dot(direction.normalized, mouseDirection);
         speed = (dotProduct < -0.5f) ? backwardSpeed : forwardSpeed;
         animator.speed = (speed == backwardSpeed) ? 0.5f : 1f;
-
-        if (isMouseButtonHeld && Time.time >= lastAttackTime + attackCooldown)
-        {
-            Attack(mouseDirection);
-            lastAttackTime = Time.time;
-        }
     }
 
-    void FixedUpdate()
+    private void UpdateMovement()
     {
         if (direction.sqrMagnitude > 0)
         {
@@ -68,8 +82,9 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
     }
 
-    void Attack(Vector2 attackDirection)
+    private void Attack()
     {
+        Vector2 attackDirection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
         Vector2 spawnPosition = (Vector2)playerCollider.bounds.center + attackDirection * swordSpawnDistance;
         GameObject sword = Instantiate(swordPrefab, spawnPosition, Quaternion.identity);
         sword.transform.right = attackDirection;
