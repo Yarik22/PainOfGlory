@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ac9cfd482cc71014586647d81f994e29
+guid: 08ce55352f98db542a458b8af81d291e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5242061079237672186
-    second: 0_6_5_14_69_46_30_74_686_0
+      213: -4939317653438719985
+    second: Stylized Sky BG (78)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 0_6_5_14_69_46_30_74_686_0
+      name: Stylized Sky BG (78)_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 46
-        height: 99
+        width: 1920
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6034329d8357047b0800000000000000
-      internalID: -5242061079237672186
+      spriteID: f0818f983c4047bb0800000000000000
+      internalID: -4939317653438719985
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      0_6_5_14_69_46_30_74_686_0: -5242061079237672186
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
