@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BIRDSPRITESHEET_White_0: 6641995128204204009
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
