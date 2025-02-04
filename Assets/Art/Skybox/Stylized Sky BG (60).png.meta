@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Stylized Sky BG (60)_0: 4765945850371978941
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
