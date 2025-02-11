@@ -51,14 +51,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 482e3b7086fbc3343b06cf0f99021c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 4
-  backwardSpeed: 2
+  forwardSpeed: 3.5
+  backwardSpeed: 1.5
   acceleration: 5
   useAcceleration: 0
   animator: {fileID: 910804419123259175}
   swordPrefab: {fileID: 2833546378881004422, guid: d0ac8871da461a24684d2180be51c39f,
     type: 3}
-  swordSpawnDistance: 0.25
+  swordSpawnDistance: 1
   attackCooldown: 0.5
 --- !u!212 &666831539841782102
 SpriteRenderer:

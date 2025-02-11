@@ -27,6 +27,5 @@ public class SoundSettings : MonoBehaviour
     public void OnMasterVolumeChanged() => volumeManager.SetMasterVolume(masterVolumeSlider.value);
     public void OnMusicVolumeChanged() => volumeManager.SetMusicVolume(musicVolumeSlider.value);
     public void OnSFXVolumeChanged() => volumeManager.SetSFXVolume(sfxVolumeSlider.value);
-
     public void PlayRandomSFX() => sfxManager.PlayRandomSFX();
 }
