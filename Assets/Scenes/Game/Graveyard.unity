@@ -39163,7 +39163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 947432118}
-  lerpSpeed: 1
+  lerpSpeed: 3
 --- !u!1001 &1427787000
 PrefabInstance:
   m_ObjectHideFlags: 0
