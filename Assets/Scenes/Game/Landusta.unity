@@ -6246,6 +6246,52 @@ MonoBehaviour:
   targetAlpha: 0.15
   defaultAlpha: 1
   lerpSpeed: 2
+--- !u!1 &1238913217
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1238913219}
+  - component: {fileID: 1238913218}
+  m_Layer: 0
+  m_Name: Debug
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1238913218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238913217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a1099eae1997a1468c2bb174b777977, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSceneName: Graveyard
+  teleportKey: 117
+--- !u!4 &1238913219
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238913217}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.5627108, y: 2.2069383, z: -0.0115231145}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1334951514
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33707,3 +33753,4 @@ SceneRoots:
   - {fileID: 2003361537}
   - {fileID: 9036855}
   - {fileID: 1025051324}
+  - {fileID: 1238913219}
