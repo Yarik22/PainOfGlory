@@ -1,39 +1,36 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    public Transform player;  // Reference to the player's transform
-    public float followDistance = 10f;  // Distance at which the enemy starts following the player
-    private NavMeshAgent navMeshAgent;
+    public int maxHealth = 100;
+    private int currentHealth;
 
     void Start()
     {
-        // Get the NavMeshAgent component attached to the enemy
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        currentHealth = maxHealth;
+    }
 
-        if (navMeshAgent == null)
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
         {
-            Debug.LogError("NavMeshAgent not found on Enemy object. Please attach it.");
+            Die();
         }
     }
 
-    void Update()
+    void Die()
     {
-        // Check if the NavMeshAgent exists and is on a valid NavMesh
-        if (navMeshAgent == null || !navMeshAgent.isOnNavMesh) return;
+        Destroy(gameObject);
+    }
 
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        if (distanceToPlayer <= followDistance)
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("PlayerSword"))
         {
-            // Enemy starts following the player
-            navMeshAgent.SetDestination(player.position);
-        }
-        else
-        {
-            // Stop following if too far
-            navMeshAgent.ResetPath();
+            int damage = 20;
+            TakeDamage(damage);
         }
     }
 }

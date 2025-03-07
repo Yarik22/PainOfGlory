@@ -87,8 +87,13 @@ public class PlayerMovementController : MonoBehaviour
         Vector2 attackDirection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
         Vector2 spawnPosition = (Vector2)playerCollider.bounds.center + attackDirection * swordSpawnDistance;
         GameObject sword = Instantiate(swordPrefab, spawnPosition, Quaternion.identity);
+        sword.layer = gameObject.layer;
+        sword.tag = "PlayerSword"; // Set tag for interaction with enemies
         sword.transform.right = attackDirection;
         sword.transform.SetParent(transform);
+
+        // Set sorting layer if needed
+        // ...
 
         if (sword.TryGetComponent(out SpriteRenderer swordRenderer))
         {

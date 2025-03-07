@@ -36243,6 +36243,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1103157681731156366, guid: 8df398c2d74b639469be29341a86e494,
         type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1103157681731156366, guid: 8df398c2d74b639469be29341a86e494,
+        type: 3}
       propertyPath: m_Color.b
       value: 0
       objectReference: {fileID: 0}
@@ -36259,12 +36264,12 @@ PrefabInstance:
     - target: {fileID: 4171808111780821933, guid: 8df398c2d74b639469be29341a86e494,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.94
+      value: 10.03
       objectReference: {fileID: 0}
     - target: {fileID: 4171808111780821933, guid: 8df398c2d74b639469be29341a86e494,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.11
+      value: -6.74
       objectReference: {fileID: 0}
     - target: {fileID: 4171808111780821933, guid: 8df398c2d74b639469be29341a86e494,
         type: 3}
