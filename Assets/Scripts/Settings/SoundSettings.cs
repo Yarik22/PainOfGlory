@@ -7,19 +7,22 @@ public class SoundSettings : MonoBehaviour
     [SerializeField] private MusicManager musicManager;
     [SerializeField] private SFXManager sfxManager;
 
-    [SerializeField] private Slider masterVolumeSlider;
-    [SerializeField] private Slider musicVolumeSlider;
-    [SerializeField] private Slider sfxVolumeSlider;
+    [SerializeField] private Slider masterVolumeSlider = null;
+    [SerializeField] private Slider musicVolumeSlider = null;
+    [SerializeField] private Slider sfxVolumeSlider = null;
 
     private void Start()
     {
-        masterVolumeSlider.value = volumeManager.GetMasterVolume();
-        musicVolumeSlider.value = volumeManager.GetMusicVolume();
-        sfxVolumeSlider.value = volumeManager.GetSFXVolume();
+        if (volumeManager != null && sfxVolumeSlider != null && sfxManager != null)
+        {
+            masterVolumeSlider.value = volumeManager.GetMasterVolume();
+            musicVolumeSlider.value = volumeManager.GetMusicVolume();
+            sfxVolumeSlider.value = volumeManager.GetSFXVolume();
 
-        volumeManager.SetMasterVolume(masterVolumeSlider.value);
-        volumeManager.SetMusicVolume(musicVolumeSlider.value);
-        volumeManager.SetSFXVolume(sfxVolumeSlider.value);
+            volumeManager.SetMasterVolume(masterVolumeSlider.value);
+            volumeManager.SetMusicVolume(musicVolumeSlider.value);
+            volumeManager.SetSFXVolume(sfxVolumeSlider.value);
+        }
 
         musicManager.PlayRandomTrack();
     }

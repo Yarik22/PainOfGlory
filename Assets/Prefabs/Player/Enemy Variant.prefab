@@ -179,3 +179,5 @@ MonoBehaviour:
   attackRange: 1
   attackCooldown: 1.5
   maxHealth: 10
+  hitEffectPrefab: {fileID: 5520518716246948119, guid: 5db2f79cac61289449e397607297308f,
+    type: 3}

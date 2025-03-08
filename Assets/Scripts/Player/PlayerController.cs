@@ -8,8 +8,11 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private bool useAcceleration = true;
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject swordPrefab;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private float projectileSpeed = 10f;
     [SerializeField] private float swordSpawnDistance = 0.2f;
-    [SerializeField] private float attackCooldown = 0.5f;
+    [SerializeField] public float attackCooldown = 1f;
+    [SerializeField] public float projectileCooldown = 3f;
 
     private Vector2 direction;
     private Vector2 velocity;
@@ -19,6 +22,13 @@ public class PlayerMovementController : MonoBehaviour
     private bool isMouseButtonHeld;
     private float speed;
     private float lastAttackTime;
+    private float lastProjectileTime;
+
+    private void Awake()
+    {
+        attackCooldown = PlayerPrefs.GetFloat("Attck", 1);
+        projectileCooldown = PlayerPrefs.GetFloat("Projectile", 3);
+    }
 
     private void Start()
     {
@@ -26,6 +36,7 @@ public class PlayerMovementController : MonoBehaviour
         playerCollider = GetComponent<Collider2D>();
         playerRenderer = GetComponent<SpriteRenderer>();
         lastAttackTime = -attackCooldown;
+        lastProjectileTime = -projectileCooldown;
     }
 
     private void Update()
@@ -37,6 +48,11 @@ public class PlayerMovementController : MonoBehaviour
         {
             Attack();
             lastAttackTime = Time.time;
+        }
+        if (Input.GetMouseButton(1) && Time.time >= lastProjectileTime + projectileCooldown)
+        {
+            ShootProjectile();
+            lastProjectileTime = Time.time;
         }
     }
 
@@ -88,16 +104,37 @@ public class PlayerMovementController : MonoBehaviour
         Vector2 spawnPosition = (Vector2)playerCollider.bounds.center + attackDirection * swordSpawnDistance;
         GameObject sword = Instantiate(swordPrefab, spawnPosition, Quaternion.identity);
         sword.layer = gameObject.layer;
-        sword.tag = "PlayerSword"; // Set tag for interaction with enemies
+        sword.tag = "PlayerSword";
         sword.transform.right = attackDirection;
         sword.transform.SetParent(transform);
-
-        // Set sorting layer if needed
-        // ...
 
         if (sword.TryGetComponent(out SpriteRenderer swordRenderer))
         {
             swordRenderer.sortingLayerID = playerRenderer.sortingLayerID;
         }
     }
+
+    private void ShootProjectile()
+    {
+        if (projectilePrefab == null) return;
+
+        Vector2 shootDirection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+        Vector2 spawnPosition = (Vector2)playerCollider.bounds.center + shootDirection * 0.5f;
+
+        // Instantiate the projectile
+        GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
+        Rigidbody2D rbProjectile = projectile.GetComponent<Rigidbody2D>();
+
+        // Set the projectile's layer to the player's layer
+        projectile.layer = gameObject.layer;
+
+        if (rbProjectile != null)
+        {
+            rbProjectile.linearVelocity = shootDirection * projectileSpeed;
+        }
+
+        // Optionally destroy the projectile after 3 seconds
+        Destroy(projectile, 3f);
+    }
+
 }

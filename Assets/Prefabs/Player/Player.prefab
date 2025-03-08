@@ -58,8 +58,13 @@ MonoBehaviour:
   animator: {fileID: 910804419123259175}
   swordPrefab: {fileID: 2833546378881004422, guid: d0ac8871da461a24684d2180be51c39f,
     type: 3}
+  projectilePrefab: {fileID: 7143547317306317498, guid: 976cd6c9603807945a373adb0125c7b1,
+    type: 3}
+  projectileSpeed: 10
   swordSpawnDistance: 1
   attackCooldown: 0.5
+  projectileCooldown: 0.2
+  attackSound: {fileID: 986803636595669470}
 --- !u!212 &666831539841782102
 SpriteRenderer:
   m_ObjectHideFlags: 0

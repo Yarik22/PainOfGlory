@@ -32,4 +32,14 @@ public class SceneLoader : MonoBehaviour
             panel.SetActive(false);
         }
     }
+
+    public void StartNewGame(string sceneName)
+    {
+        PlayerPrefs.SetInt("Coins", 0);
+        PlayerPrefs.SetInt("XP", 0);
+        PlayerPrefs.SetFloat("Attck", 1);
+        PlayerPrefs.SetFloat("Projectile", 3);
+        PlayerPrefs.Save();
+        ChangeScene(sceneName);
+    }
 }

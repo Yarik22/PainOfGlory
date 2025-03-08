@@ -8,6 +8,7 @@ public class MusicManager : MonoBehaviour
 
     private void Update()
     {
+        // Automatically play the next track if no music is playing
         if (!audioSource.isPlaying && musicTracks.Length > 0)
         {
             PlayNextTrack();
