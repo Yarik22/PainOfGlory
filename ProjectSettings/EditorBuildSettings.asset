@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Game/MainMenu.unity
+    guid: 36c9d37c9625f0c43948bf8ed6325e66
+  - enabled: 1
     path: Assets/Scenes/Game/Calden.unity
     guid: e57f9736b0fa2984699d0aeb91d154f6
   - enabled: 1
@@ -17,9 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game/Landusta.unity
     guid: 79ffd10ce59556a45819aa3adb228f3b
-  - enabled: 1
-    path: Assets/Scenes/Game/MainMenu.unity
-    guid: 36c9d37c9625f0c43948bf8ed6325e66
   - enabled: 1
     path: Assets/Scenes/Game/Talon.unity
     guid: 98ab56e7691626f4c9b8cc16fc6d69a6

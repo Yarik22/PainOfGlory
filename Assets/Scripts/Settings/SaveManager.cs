@@ -60,7 +60,6 @@ public class SaveManager : MonoBehaviour
         Debug.Log($"Game loaded from Slot {slot}: Coins {coins}, XP {xp}, AttackSpeed {attck}, Projectiling {prj}, Date {saveDate}");
     }
 
-    // Function to get description of each slot
     public string GetSlotDescription(int slot)
     {
         string slotPrefix = slot.ToString();

@@ -16,6 +16,7 @@ public class EnemyChecker : MonoBehaviour
 
         if (enemies.Length == 0)
         {
+            Destroy(GameObject.FindGameObjectWithTag("Sounds"));
             Debug.Log("No enemies left! Returning to Graveyard...");
             SceneManager.LoadScene("Graveyard");
         }

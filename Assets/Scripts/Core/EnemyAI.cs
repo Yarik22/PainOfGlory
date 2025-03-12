@@ -8,9 +8,9 @@ public class EnemyAI : MonoBehaviour
     public float detectionRange = 5f;
     public float attackRange = 1f;
     public float attackCooldown = 1.5f;
-    public int maxHealth = 10; // Enemy dies after 10 hits
+    public int maxHealth = 10;
 
-    public GameObject hitEffectPrefab; // Reference to the particle effect prefab
+    public GameObject hitEffectPrefab;
 
     private NavMeshAgent agent;
     private float lastAttackTime;
@@ -52,7 +52,6 @@ public class EnemyAI : MonoBehaviour
     void Attack()
     {
         Debug.Log("Enemy Attacked the Player!");
-        // Implement player damage logic here
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -73,11 +72,10 @@ public class EnemyAI : MonoBehaviour
         currentHealth--;
         Debug.Log("Enemy Hit! Health left: " + currentHealth);
 
-        // Instantiate the hit effect at the enemy's position
         if (hitEffectPrefab != null)
         {
             GameObject hitEffect = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
-            Destroy(hitEffect, 1f); // Destroy the particle effect after 1 second
+            Destroy(hitEffect, 1f);
         }
 
         if (currentHealth <= 0)
@@ -90,9 +88,8 @@ public class EnemyAI : MonoBehaviour
     {
         Debug.Log("Enemy Defeated!");
 
-        // Reward the player with random coins and XP
-        int coinsReward = Random.Range(5, 11); // 5 to 10 coins
-        int xpReward = Random.Range(1, 4); // 1 to 3 XP
+        int coinsReward = Random.Range(5, 11);
+        int xpReward = Random.Range(1, 4);
 
         CoinManager.Instance.AddCoins(coinsReward);
         XPManager.Instance.AddXP(xpReward);

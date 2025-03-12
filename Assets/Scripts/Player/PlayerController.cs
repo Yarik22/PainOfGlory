@@ -19,7 +19,7 @@ public class PlayerMovementController : MonoBehaviour
     private Rigidbody2D rb;
     private Collider2D playerCollider;
     private SpriteRenderer playerRenderer;
-    private bool isMouseButtonHeld;
+    private bool isPrimaryAttackHeld;
     private float speed;
     private float lastAttackTime;
     private float lastProjectileTime;
@@ -44,12 +44,12 @@ public class PlayerMovementController : MonoBehaviour
         UpdateMovementInput();
         UpdateAnimatorParameters();
 
-        if (isMouseButtonHeld && Time.time >= lastAttackTime + attackCooldown)
+        if (isPrimaryAttackHeld && Time.time >= lastAttackTime + attackCooldown)
         {
             Attack();
             lastAttackTime = Time.time;
         }
-        if (Input.GetMouseButton(1) && Time.time >= lastProjectileTime + projectileCooldown)
+        if (Input.GetKey(InputManager.Instance.GetKey("SecondaryAttack")) && Time.time >= lastProjectileTime + projectileCooldown)
         {
             ShootProjectile();
             lastProjectileTime = Time.time;
@@ -63,8 +63,18 @@ public class PlayerMovementController : MonoBehaviour
 
     private void UpdateMovementInput()
     {
-        direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        isMouseButtonHeld = Input.GetMouseButton(0);
+        direction = Vector2.zero;
+
+        if (Input.GetKey(InputManager.Instance.GetKey("MoveUp")))
+            direction.y += 1;
+        if (Input.GetKey(InputManager.Instance.GetKey("MoveDown")))
+            direction.y -= 1;
+        if (Input.GetKey(InputManager.Instance.GetKey("MoveLeft")))
+            direction.x -= 1;
+        if (Input.GetKey(InputManager.Instance.GetKey("MoveRight")))
+            direction.x += 1;
+
+        isPrimaryAttackHeld = Input.GetKey(InputManager.Instance.GetKey("PrimaryAttack"));
     }
 
     private void UpdateAnimatorParameters()
@@ -75,7 +85,7 @@ public class PlayerMovementController : MonoBehaviour
         animator.SetFloat("Horizontal", direction.x);
         animator.SetFloat("Vertical", direction.y);
         animator.SetFloat("Speed", direction.sqrMagnitude);
-        animator.SetBool("IsMouseActive", isMouseButtonHeld);
+        animator.SetBool("IsMouseActive", isPrimaryAttackHeld);
         animator.SetFloat("MouseX", mouseDirection.x);
         animator.SetFloat("MouseY", mouseDirection.y);
 
@@ -121,11 +131,9 @@ public class PlayerMovementController : MonoBehaviour
         Vector2 shootDirection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
         Vector2 spawnPosition = (Vector2)playerCollider.bounds.center + shootDirection * 0.5f;
 
-        // Instantiate the projectile
         GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
         Rigidbody2D rbProjectile = projectile.GetComponent<Rigidbody2D>();
 
-        // Set the projectile's layer to the player's layer
         projectile.layer = gameObject.layer;
 
         if (rbProjectile != null)
@@ -133,8 +141,6 @@ public class PlayerMovementController : MonoBehaviour
             rbProjectile.linearVelocity = shootDirection * projectileSpeed;
         }
 
-        // Optionally destroy the projectile after 3 seconds
         Destroy(projectile, 3f);
     }
-
 }
