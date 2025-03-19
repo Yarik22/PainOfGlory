@@ -8,6 +8,9 @@ TagManager:
   - Enemy
   - Sounds
   - NPC
+  - Play
+  - Bg
+  - Network
   layers:
   - Default
   - TransparentFX

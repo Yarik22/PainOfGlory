@@ -5,7 +5,7 @@ public class TradingManager : MonoBehaviour
 {
     [Header("Player References")]
     public GameObject player;
-    private PlayerMovementController playerController;
+    private PlayerMovement playerController;
 
     [Header("Cooldown Decrease Values")]
     [SerializeField] private float attackCooldownDecreaseAmount = 0.01f;
@@ -26,7 +26,7 @@ public class TradingManager : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        playerController = player.GetComponent<PlayerMovementController>();
+        playerController = player.GetComponent<PlayerMovement>();
 
         Debug.Log("Trading Manager initialized.");
 
@@ -123,12 +123,12 @@ public class TradingManager : MonoBehaviour
 
         if (currentAttackCooldownText != null)
         {
-            currentAttackCooldownText.text = "Current AttackCooldown: " + playerController.attackCooldown.ToString("F2") + "s";
+            currentAttackCooldownText.text = "Current AttackCooldown: " + playerController.attackCooldown.ToString() + "s";
         }
 
         if (currentProjectileCooldownText != null)
         {
-            currentProjectileCooldownText.text = "Current ProjectileCooldown: " + playerController.projectileCooldown.ToString("F2") + "s";
+            currentProjectileCooldownText.text = "Current ProjectileCooldown: " + playerController.projectileCooldown.ToString() + "s";
         }
     }
 

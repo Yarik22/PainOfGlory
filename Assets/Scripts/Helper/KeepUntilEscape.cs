@@ -13,10 +13,12 @@ public class KeepUntilEscape : MonoBehaviour
 
     void Update()
     {
+        GameObject networkObj = GameObject.FindGameObjectWithTag("Network");
         // Check for the Escape key press
         if (Input.GetKeyDown(KeyCode.Escape) && !shouldDestroyOnEscape)
         {
-            // Mark the object for destruction and destroy it
+            if (networkObj != null)
+                Destroy(networkObj);
             shouldDestroyOnEscape = true;
             Destroy(gameObject);
             Debug.Log("Object destroyed after pressing Escape.");

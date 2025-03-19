@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Transform player;
     public float detectionRange = 5f;
     public float attackRange = 1f;
     public float attackCooldown = 1.5f;
@@ -16,6 +15,8 @@ public class EnemyAI : MonoBehaviour
     private float lastAttackTime;
     private int currentHealth;
 
+    private Transform nearestPlayer;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -26,27 +27,49 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        // Find the nearest player
+        FindNearestPlayer();
 
-        if (distanceToPlayer < detectionRange && IsOnSameLayer())
+        // If a player is found, move towards them
+        if (nearestPlayer != null)
         {
-            agent.SetDestination(player.position);
-        }
-        else
-        {
-            agent.ResetPath();
-        }
+            float distanceToPlayer = Vector2.Distance(transform.position, nearestPlayer.position);
 
-        if (distanceToPlayer < attackRange && Time.time > lastAttackTime + attackCooldown && IsOnSameLayer())
-        {
-            Attack();
-            lastAttackTime = Time.time;
+            if (distanceToPlayer < detectionRange)
+            {
+                agent.SetDestination(nearestPlayer.position);
+            }
+            else
+            {
+                agent.ResetPath();
+            }
+
+            if (distanceToPlayer < attackRange && Time.time > lastAttackTime + attackCooldown)
+            {
+                Attack();
+                lastAttackTime = Time.time;
+            }
         }
     }
 
-    bool IsOnSameLayer()
+    // Find the nearest player in range
+    void FindNearestPlayer()
     {
-        return gameObject.layer == player.gameObject.layer;
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        float closestDistance = float.MaxValue;
+        nearestPlayer = null;
+
+        foreach (GameObject playerObj in players)
+        {
+            float distance = Vector2.Distance(transform.position, playerObj.transform.position);
+
+            // If the player is closer than the previous closest, update nearestPlayer
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                nearestPlayer = playerObj.transform;
+            }
+        }
     }
 
     void Attack()
@@ -101,6 +124,7 @@ public class EnemyAI : MonoBehaviour
     {
         GameObject sounds = GameObject.FindGameObjectWithTag("Sounds");
         GameObject npc = GameObject.FindGameObjectWithTag("NPC");
+        GameObject networkObj = GameObject.FindGameObjectWithTag("Network");
         PlayerPrefs.SetInt("Coins", 0);
         PlayerPrefs.SetInt("XP", 0);
         PlayerPrefs.Save();
@@ -108,6 +132,8 @@ public class EnemyAI : MonoBehaviour
             Destroy(sounds);
         if (npc != null)
             Destroy(npc);
+        if (networkObj != null)
+            Destroy(networkObj);
         SceneManager.LoadScene("MainMenu");
     }
 }

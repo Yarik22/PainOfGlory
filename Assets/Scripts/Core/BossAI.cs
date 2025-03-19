@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class BossAI : MonoBehaviour
 {
-    public Transform player;
     public float detectionRange = 10f;
     public float attackRange = 2f;
     public float attackCooldown = 2f;
@@ -17,8 +16,13 @@ public class BossAI : MonoBehaviour
     private int currentHealth;
     private bool isDisabled;
 
+    private Transform player; // Замість публічної змінної для гравця
+
     void Start()
     {
+        // Знайти гравця за тегом
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;

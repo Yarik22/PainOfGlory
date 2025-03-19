@@ -11,10 +11,18 @@ public class NPCInteraction : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player == null)
+        {
+            Debug.LogError("Player object not found! Ensure the player has the 'Player' tag assigned.");
+        }
     }
 
     void Update()
     {
+        // Check if player is null to avoid NullReferenceException
+        if (player == null) return;
+
         if (Vector2.Distance(player.transform.position, transform.position) <= interactionDistance
             && Input.GetKeyDown(interactionKey))
         {

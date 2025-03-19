@@ -1,9 +1,12 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class PlayerMovementController : MonoBehaviour
+public class PlayerMovementController : NetworkBehaviour
 {
+    private SpriteRenderer playerRenderer;
     [SerializeField] private float forwardSpeed = 4f;
     [SerializeField] private float backwardSpeed = 2f;
+    [SerializeField] private float sideSpeed = 3f;
     [SerializeField] private float acceleration = 5f;
     [SerializeField] private bool useAcceleration = true;
     [SerializeField] private Animator animator;
@@ -18,129 +21,152 @@ public class PlayerMovementController : MonoBehaviour
     private Vector2 velocity;
     private Rigidbody2D rb;
     private Collider2D playerCollider;
-    private SpriteRenderer playerRenderer;
-    private bool isPrimaryAttackHeld;
-    private float speed;
     private float lastAttackTime;
     private float lastProjectileTime;
 
+    private NetworkVariable<Vector2> networkPosition = new NetworkVariable<Vector2>(
+        writePerm: NetworkVariableWritePermission.Owner);
+    private NetworkVariable<Vector2> networkDirection = new NetworkVariable<Vector2>(
+        writePerm: NetworkVariableWritePermission.Owner);
+    private NetworkVariable<Vector2> networkMouseDirection = new NetworkVariable<Vector2>(
+        writePerm: NetworkVariableWritePermission.Owner);
+
     private void Awake()
     {
-        attackCooldown = PlayerPrefs.GetFloat("Attck", 1);
+        attackCooldown = PlayerPrefs.GetFloat("Attack", 1);
         projectileCooldown = PlayerPrefs.GetFloat("Projectile", 3);
     }
 
     private void Start()
     {
+        playerRenderer = GetComponent<SpriteRenderer>();
+
+        if (playerRenderer == null)
+        {
+            Debug.LogError("Player does not have a SpriteRenderer attached!");
+        }
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
-        playerRenderer = GetComponent<SpriteRenderer>();
         lastAttackTime = -attackCooldown;
         lastProjectileTime = -projectileCooldown;
     }
 
     private void Update()
     {
-        UpdateMovementInput();
-        UpdateAnimatorParameters();
+        if (IsOwner)
+        {
+            UpdateMovementInput();
+            networkDirection.Value = direction;
+            networkMouseDirection.Value = GetMouseDirection();
+            UpdateAnimatorParameters();
 
-        if (isPrimaryAttackHeld && Time.time >= lastAttackTime + attackCooldown)
-        {
-            Attack();
-            lastAttackTime = Time.time;
+            if (Input.GetKey(InputManager.Instance.GetKey("PrimaryAttack")) && Time.time >= lastAttackTime + attackCooldown)
+            {
+                RequestAttackServerRpc(networkMouseDirection.Value);
+                lastAttackTime = Time.time;
+            }
+            if (Input.GetKey(InputManager.Instance.GetKey("SecondaryAttack")) && Time.time >= lastProjectileTime + projectileCooldown)
+            {
+                RequestShootProjectileServerRpc(networkMouseDirection.Value);
+                lastProjectileTime = Time.time;
+            }
         }
-        if (Input.GetKey(InputManager.Instance.GetKey("SecondaryAttack")) && Time.time >= lastProjectileTime + projectileCooldown)
+        else
         {
-            ShootProjectile();
-            lastProjectileTime = Time.time;
+            UpdateAnimatorForRemotePlayer();
         }
     }
 
     private void FixedUpdate()
     {
-        UpdateMovement();
+        if (IsOwner)
+        {
+            UpdateMovement();
+            networkPosition.Value = rb.position;
+        }
+        else
+        {
+            transform.position = Vector2.Lerp(transform.position, networkPosition.Value, 0.15f);
+        }
     }
 
     private void UpdateMovementInput()
     {
         direction = Vector2.zero;
-
-        if (Input.GetKey(InputManager.Instance.GetKey("MoveUp")))
-            direction.y += 1;
-        if (Input.GetKey(InputManager.Instance.GetKey("MoveDown")))
-            direction.y -= 1;
-        if (Input.GetKey(InputManager.Instance.GetKey("MoveLeft")))
-            direction.x -= 1;
-        if (Input.GetKey(InputManager.Instance.GetKey("MoveRight")))
-            direction.x += 1;
-
-        isPrimaryAttackHeld = Input.GetKey(InputManager.Instance.GetKey("PrimaryAttack"));
+        if (Input.GetKey(InputManager.Instance.GetKey("MoveUp"))) direction.y += 1;
+        if (Input.GetKey(InputManager.Instance.GetKey("MoveDown"))) direction.y -= 1;
+        if (Input.GetKey(InputManager.Instance.GetKey("MoveLeft"))) direction.x -= 1;
+        if (Input.GetKey(InputManager.Instance.GetKey("MoveRight"))) direction.x += 1;
     }
 
     private void UpdateAnimatorParameters()
     {
-        Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 mouseDirection = (cursorPosition - (Vector2)playerCollider.bounds.center).normalized;
-
         animator.SetFloat("Horizontal", direction.x);
         animator.SetFloat("Vertical", direction.y);
         animator.SetFloat("Speed", direction.sqrMagnitude);
-        animator.SetBool("IsMouseActive", isPrimaryAttackHeld);
-        animator.SetFloat("MouseX", mouseDirection.x);
-        animator.SetFloat("MouseY", mouseDirection.y);
+        animator.SetFloat("MouseX", networkMouseDirection.Value.x);
+        animator.SetFloat("MouseY", networkMouseDirection.Value.y);
+    }
 
-        float dotProduct = Vector2.Dot(direction.normalized, mouseDirection);
-        speed = (dotProduct < -0.5f) ? backwardSpeed : forwardSpeed;
-        animator.speed = (speed == backwardSpeed) ? 0.5f : 1f;
+    private void UpdateAnimatorForRemotePlayer()
+    {
+        animator.SetFloat("Horizontal", networkDirection.Value.x);
+        animator.SetFloat("Vertical", networkDirection.Value.y);
+        animator.SetFloat("Speed", networkDirection.Value.sqrMagnitude);
+        animator.SetFloat("MouseX", networkMouseDirection.Value.x);
+        animator.SetFloat("MouseY", networkMouseDirection.Value.y);
+    }
+
+    private Vector2 GetMouseDirection()
+    {
+        Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        return (cursorPosition - (Vector2)playerCollider.bounds.center).normalized;
     }
 
     private void UpdateMovement()
     {
-        if (direction.sqrMagnitude > 0)
-        {
-            direction.Normalize();
-        }
-
-        velocity = useAcceleration
-            ? Vector2.MoveTowards(velocity, direction * speed, acceleration * Time.fixedDeltaTime)
-            : direction * speed;
-
+        if (direction.sqrMagnitude > 0) direction.Normalize();
+        Vector2 mouseDirection = networkMouseDirection.Value;
+        float dotProduct = Vector2.Dot(direction, mouseDirection);
+        float currentSpeed = (dotProduct > 0.7f) ? forwardSpeed : (dotProduct < -0.7f) ? backwardSpeed : sideSpeed;
+        velocity = useAcceleration ? Vector2.MoveTowards(velocity, direction * currentSpeed, acceleration * Time.fixedDeltaTime) : direction * currentSpeed;
         rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
     }
 
-    private void Attack()
+    [ServerRpc]
+    private void RequestAttackServerRpc(Vector2 attackDirection, ServerRpcParams rpcParams = default)
     {
-        Vector2 attackDirection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
-        Vector2 spawnPosition = (Vector2)playerCollider.bounds.center + attackDirection * swordSpawnDistance;
+        PerformAttackClientRpc(attackDirection);
+    }
+
+    [ClientRpc]
+    private void PerformAttackClientRpc(Vector2 attackDirection)
+    {
+        Vector2 spawnPosition = (Vector2)transform.position + attackDirection * swordSpawnDistance;
         GameObject sword = Instantiate(swordPrefab, spawnPosition, Quaternion.identity);
         sword.layer = gameObject.layer;
         sword.tag = "PlayerSword";
         sword.transform.right = attackDirection;
         sword.transform.SetParent(transform);
-
         if (sword.TryGetComponent(out SpriteRenderer swordRenderer))
         {
             swordRenderer.sortingLayerID = playerRenderer.sortingLayerID;
         }
     }
 
-    private void ShootProjectile()
+    [ServerRpc]
+    private void RequestShootProjectileServerRpc(Vector2 shootDirection, ServerRpcParams rpcParams = default)
     {
-        if (projectilePrefab == null) return;
+        PerformShootProjectileClientRpc(shootDirection);
+    }
 
-        Vector2 shootDirection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+    [ClientRpc]
+    private void PerformShootProjectileClientRpc(Vector2 shootDirection)
+    {
         Vector2 spawnPosition = (Vector2)playerCollider.bounds.center + shootDirection * 0.5f;
-
         GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
         Rigidbody2D rbProjectile = projectile.GetComponent<Rigidbody2D>();
-
-        projectile.layer = gameObject.layer;
-
-        if (rbProjectile != null)
-        {
-            rbProjectile.linearVelocity = shootDirection * projectileSpeed;
-        }
-
+        if (rbProjectile != null) rbProjectile.linearVelocity = shootDirection * projectileSpeed;
         Destroy(projectile, 3f);
     }
 }
