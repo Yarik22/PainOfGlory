@@ -31,7 +31,6 @@ public class TeleportationToTotemScene : MonoBehaviour
             return;
         }
 
-        // Find all players by tag "Player"
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
         if (players.Length == 0)
@@ -48,16 +47,14 @@ public class TeleportationToTotemScene : MonoBehaviour
 
             foreach (Transform totemTransform in totemTransforms)
             {
-                // Check if player is within detection radius
                 float playerToTotemDistance = Vector2.Distance(playerPosition, totemTransform.position);
                 float mouseToTotemDistance = Vector2.Distance(mousePosition, totemTransform.position);
 
                 if (playerToTotemDistance <= detectionRadius && mouseToTotemDistance <= 2f &&
                     Input.GetKeyDown(KeyCode.F) && Time.time >= lastTeleportTime + teleportCooldown)
                 {
-                    // Only teleport the player who presses the key, not all players.
                     TeleportPlayerToTotem(player.transform, totemTransform);
-                    lastTeleportTime = Time.time; // Set cooldown
+                    lastTeleportTime = Time.time;
                     break;
                 }
             }
@@ -75,7 +72,6 @@ public class TeleportationToTotemScene : MonoBehaviour
 
         playerTransform.position = totemTransform.position;
 
-        // Synchronize player layer and sorting layers with the totem
         SpriteRenderer playerSpriteRenderer = playerTransform.GetComponent<SpriteRenderer>();
         if (playerSpriteRenderer != null)
         {
@@ -89,7 +85,6 @@ public class TeleportationToTotemScene : MonoBehaviour
 
     private void UpdateChildObjectsLayersAndSorting(Transform player, Transform totemTransform)
     {
-        // Update layer and sorting order for any child objects of the player
         foreach (Transform child in player)
         {
             child.gameObject.layer = totemTransform.gameObject.layer;
